@@ -84,7 +84,7 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
       <div aria-hidden="true" className="divider-dorado opacity-30 mx-6 md:mx-10" />
 
       {/* ── FORMULARIO ── */}
-      <div id="participar" className="relative w-full max-w-7xl mx-auto px-6 md:px-10 py-14 md:py-16">
+      <div id="participar" className="relative w-full max-w-7xl mx-auto px-6 md:px-10 py-14 md:py-16" style={{ backgroundColor: '#0A0A0A' }}>
         <div className="max-w-xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

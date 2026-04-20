@@ -29,7 +29,7 @@ export default function Home() {
     <>
       {/* ── NAV ── */}
       <nav
-        className="fixed top-0 inset-x-0 z-40 border-b border-rf-dorado/10 backdrop-blur-md"
+        className="fixed top-0 inset-x-0 z-40 backdrop-blur-md"
         style={{ backgroundColor: 'rgba(5,5,5,0.85)' }}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-10 h-20 flex items-center justify-center">

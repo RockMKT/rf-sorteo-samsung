@@ -12,7 +12,7 @@ export default function SectionGiftCard() {
     const [modalBAOpen, setModalBAOpen] = useState(false)
   return (
     <>
-    <section className="py-20 md:py-28 bg-rf-negro relative overflow-hidden">
+    <section className="py-20 md:py-28 relative overflow-hidden" style={{ backgroundColor: '#0A0A0A' }}>
       <div
         aria-hidden="true"
         className="absolute inset-0 pointer-events-none"
