@@ -61,13 +61,12 @@ export default function SectionCombos() {
           ))}
         </div>
 
-        {/* Nota al pie */}
-        <FadeIn delay={0.3} className="mt-10 text-center">
-          <p className="text-xs text-rf-texto/30">
-            {/* TODO: agregar link al menú completo */}
-            Consumiendo una Sugerencia del Chef o un MENÚ KIDS te llevas tu vaso de regalo
-          </p>
-        </FadeIn>
+        
+                  <FadeIn delay={0.15}>
+                    <p className="text-rf-texto/50 text-center mt-6 text-sm leading-relaxed mb-8">
+                      Consumiendo una Sugerencia del Chef o un MENÚ KIDS te llevas un vaso de regalo
+                    </p>
+                  </FadeIn>
       </div>
 
       <div

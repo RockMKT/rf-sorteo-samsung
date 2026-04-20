@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         'rf-carbon': '#111111',
-        'rf-dorado': '#C4AB4B',
+        'rf-dorado': '#fab915',
         'rf-negro': '#050505',
         'rf-gris': '#1A1A1A',
         'rf-texto': '#F0F0F0',
@@ -22,7 +22,7 @@ const config: Config = {
         sans: ['GothamBook', 'Arial', 'sans-serif'],
       },
       backgroundImage: {
-        'gradient-dorado': 'linear-gradient(135deg, #C4AB4B 0%, #DCC96A 50%, #C4AB4B 100%)',
+        'gradient-dorado': 'linear-gradient(135deg, #fab915 0%, #fad04c 50%, #fab915 100%)',
       },
       animation: {
         'glow-pulse': 'glow-pulse 3s ease-in-out infinite',

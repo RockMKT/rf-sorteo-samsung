@@ -6,6 +6,7 @@ import HeroSection from '@/components/HeroSection'
 import SectionCombos from '@/components/SectionCombos'
 import SectionPelota from '@/components/SectionPelota'
 import SectionGiftCard from '@/components/SectionGiftCard'
+import SectionPedidosYa from'@/components/SectionPedidosYa'
 import SectionSucursales from '@/components/SectionSucursales'
 import Footer from '@/components/Footer'
 import ModalConfirmacion from '@/components/ModalConfirmacion'
@@ -31,13 +32,13 @@ export default function Home() {
         className="fixed top-0 inset-x-0 z-40 border-b border-rf-dorado/10 backdrop-blur-md"
         style={{ backgroundColor: 'rgba(5,5,5,0.85)' }}
       >
-        <div className="max-w-7xl mx-auto px-6 md:px-10 h-14 flex items-center justify-center">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 h-20 flex items-center justify-center">
           <a href="/" aria-label="Rock&Feller's — Inicio">
             <Image
               src="/rflogo.png"
               alt="Rock&Feller's"
-              width={110}
-              height={40}
+              width={160}
+              height={110}
               className="object-contain"
               priority
             />
@@ -55,6 +56,7 @@ export default function Home() {
 
         {/* <SectionPelota /> */}
 
+        <SectionPedidosYa />
         <SectionGiftCard />
 
         <SectionSucursales />

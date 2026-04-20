@@ -32,13 +32,13 @@ export default function SectionGiftCard() {
 
           {/* Logo / imagen gift card — reemplazar src cuando esté la imagen definitiva */}
           <FadeIn delay={0.1}>
-            <div className="relative w-48 h-28 mx-auto mb-8">
+            <div className="relative w-full max-w-md h-64 mx-auto mb-8">
               <Image
                 src="/giftcards.png"
                 alt="Gift Card Rock&Feller's"
                 fill
                 className="object-contain"
-                sizes="500px"
+                sizes="(max-width: 768px) 100vw, 448px"
               />
             </div>
           </FadeIn>
@@ -69,7 +69,7 @@ export default function SectionGiftCard() {
             <a
               href="#"
               onClick={e => e.preventDefault()}
-              className="inline-block px-8 py-3 font-display text-sm uppercase tracking-widest border border-rf-dorado/40 text-rf-dorado hover:bg-rf-dorado hover:text-rf-negro transition-all duration-200"
+              className="inline-block px-8 py-3 font-display text-sm uppercase tracking-widest bg-rf-dorado text-rf-negro hover:bg-rf-dorado hover:text-rf-negro transition-all duration-200"
             >
               Comprar
             </a>

@@ -18,59 +18,69 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 60% 50% at 70% 40%, rgba(196,171,75,0.06) 0%, transparent 70%)',
+            'radial-gradient(ellipse 70% 50% at 50% 30%, rgba(250,185,21,0.05) 0%, transparent 70%)',
         }}
       />
-      <div
-        aria-hidden="true"
-        className="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-rf-dorado/20 to-transparent"
-      />
 
-      {/* ── SPLIT: texto | imagen ── */}
-      <div className="relative flex-1 max-w-7xl mx-auto w-full px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-10 items-center py-16 md:py-20">
-        {/* Columna izquierda — logo + texto */}
-        <div className="flex flex-col items-start">
-          {/* Chip */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-          >
-            <span className="inline-block text-center text-[10px] font-display uppercase tracking-[0.3em] text-rf-dorado border border-rf-dorado/30 px-4 py-1.5 mb-8">
-              GANÁ UN TELEVISOR SAMSUNG 50° PULGADAS HD
-            </span>
-          </motion.div>
+      {/* ── CONTENIDO HERO (centrado) ── */}
+      <div className="relative w-full max-w-4xl mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-10 flex flex-col items-center text-center">
 
-          {/* Logo en lugar del H1 */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
-            className="mb-6"
-          >
+        {/* Título */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: 'easeOut' }}
+          className="mb-6 w-full"
+        >
+          <h1 className="font-display text-3xl md:text-5xl uppercase tracking-wide text-rf-texto leading-tight">
+            MIRÁ EL MUNDIAL EN 98&ldquo;
+          </h1>
+          <div aria-hidden="true" className="mt-4 mx-auto w-16 h-px bg-rf-dorado/50" />
+        </motion.div>
+
+        {/* Imagen del televisor — centrada con sombra gris */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          className="relative w-full max-w-2xl mx-auto mb-8"
+        >
+          {/* Sombra gris difuminada detrás del televisor */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-4 bottom-0 h-3/4 blur-3xl rounded-full"
+            style={{
+              background:
+                'radial-gradient(ellipse at 50% 80%, rgba(247, 246, 246, 0.3) 0%, rgba(171, 167, 167, 0.1) 50%, transparent 75%)',
+            }}
+          />
+
+          {/* TV */}
+          <div className="relative aspect-video w-full">
             <Image
-              src="/televisor.png"
-              alt="Rock&Feller's"
-              width={320}
-              height={120}
+              src="/televisor98.png"
+              alt="Premio: televisor Samsung 98 pulgadas"
+              fill
               priority
-              className="object-contain object-left max-w-[280px] md:max-w-[320px]"
+              className="object-contain drop-shadow-2xl"
+              sizes="(max-width: 768px) 100vw, 672px"
             />
-          </motion.div>
+          </div>
+        </motion.div>
 
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-            className="text-rf-texto/60 text-center text-base md:text-lg max-w-md mb-10 leading-relaxed"
-          >
-            Carga tu factura y participá por un televisor Samsung 55° para ver el mundial en tu casa. Cada factura de Rock&Feller's es una oportunidad.
-          </motion.p>
-        </div>
+        {/* Tagline */}
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
+          className="text-rf-texto/60 text-base md:text-lg max-w-lg leading-relaxed"
+        >
+          Cargá tu factura y participá por un Smart Tv Samsung 98" para disfrutar
+          el mundial en tu casa. Cada factura de Rock&amp;Feller&apos;s es una oportunidad.
+        </motion.p>
       </div>
 
-      {/* Línea divisoria dorada */}
+      {/* Línea divisoria */}
       <div aria-hidden="true" className="divider-dorado opacity-30 mx-6 md:mx-10" />
 
       {/* ── FORMULARIO ── */}

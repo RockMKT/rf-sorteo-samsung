@@ -67,11 +67,11 @@ p, span, li, a, label, input, select, textarea, button {
 /* ─── Scrollbar ──────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #111111; }
-::-webkit-scrollbar-thumb { background: #C4AB4B; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #fab915; border-radius: 3px; }
 
 /* ─── Texto con gradiente dorado ─────────────── */
 .text-dorado {
-  background: linear-gradient(135deg, #C4AB4B 0%, #DCC96A 50%, #C4AB4B 100%);
+  background: linear-gradient(135deg, #fab915 0%, #e9b634 50%, #fab915 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -93,7 +93,7 @@ p, span, li, a, label, input, select, textarea, button {
 .input-rf:hover { border-color: rgba(196, 171, 75, 0.4); }
 .input-rf:focus {
   outline: none;
-  border-color: #C4AB4B;
+  border-color: #fab915;
   box-shadow: 0 0 0 1px rgba(196, 171, 75, 0.3);
 }
 /* Fondo del select en negro para que no rompa en Chromium */
@@ -105,5 +105,5 @@ p, span, li, a, label, input, select, textarea, button {
 /* ─── Línea separadora dorada ────────────────── */
 .divider-dorado {
   height: 1px;
-  background: linear-gradient(to right, transparent, #C4AB4B, transparent);
+  background: linear-gradient(to right, transparent, #fab915, transparent);
 }
