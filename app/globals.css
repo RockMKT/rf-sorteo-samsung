@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  ─────────────────────────────────────────────
+  FUENTES — Gotham (propietaria)
+  ─────────────────────────────────────────────
+  Los archivos que están en /public con prefijo "._" son metadatos
+  de macOS (238 bytes), NO las fuentes reales.
+
+  Para que Gotham funcione copiá los archivos reales a /public:
+    public/Gotham-Bold.otf   → para títulos (font-display)
+    public/Gotham-Book.otf   → para cuerpo  (font-sans / default)
+
+  Mientras no estén, el sitio usa Arial Black / Arial como fallback.
+  ─────────────────────────────────────────────
+*/
+@font-face {
+  font-family: 'GothamBold';
+  src: url('/Gotham-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GothamBook';
+  src: url('/Gotham-Book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Reset ─────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ─── Base — Gotham Book para todo el texto ─── */
+body {
+  background-color: #050505;
+  color: #F0F0F0;
+  font-family: 'GothamBook', Arial, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Todos los párrafos y spans heredan GothamBook */
+p, span, li, a, label, input, select, textarea, button {
+  font-family: inherit;
+}
+
+/*
+  font-display (Tailwind) → GothamBold
+  Se aplica en tailwind.config.ts como fontFamily.display
+  Usar: className="font-display" en cualquier título
+*/
+
+/* ─── Scrollbar ──────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #111111; }
+::-webkit-scrollbar-thumb { background: #C4AB4B; border-radius: 3px; }
+
+/* ─── Texto con gradiente dorado ─────────────── */
+.text-dorado {
+  background: linear-gradient(135deg, #C4AB4B 0%, #DCC96A 50%, #C4AB4B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Inputs ─────────────────────────────────── */
+.input-rf {
+  background-color: #1A1A1A;
+  border: 1px solid rgba(196, 171, 75, 0.2);
+  /* border-radius: 0.75rem; */
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-family: 'GothamBook', Arial, sans-serif;
+  color: #F0F0F0;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+.input-rf::placeholder { color: rgba(240, 240, 240, 0.3); }
+.input-rf:hover { border-color: rgba(196, 171, 75, 0.4); }
+.input-rf:focus {
+  outline: none;
+  border-color: #C4AB4B;
+  box-shadow: 0 0 0 1px rgba(196, 171, 75, 0.3);
+}
+/* Fondo del select en negro para que no rompa en Chromium */
+.input-rf option {
+  background-color: #1A1A1A;
+  color: #F0F0F0;
+}
+
+/* ─── Línea separadora dorada ────────────────── */
+.divider-dorado {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C4AB4B, transparent);
+}
