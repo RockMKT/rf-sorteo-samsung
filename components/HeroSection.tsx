@@ -75,8 +75,8 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
           transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
           className="text-rf-texto/60 text-base md:text-lg max-w-lg leading-relaxed"
         >
-          Cargá tu factura y participá por un Smart Tv Samsung 98" para disfrutar
-          el mundial en tu casa. Cada factura de Rock&amp;Feller&apos;s es una oportunidad.
+          Escribí tu código de cupón y participá por un Smart Tv Samsung 98" para disfrutar
+          el mundial en tu casa. Cada código de Rock&amp;Feller&apos;s es una oportunidad.
         </motion.p>
       </div>
 
@@ -97,7 +97,7 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
                 Registrá tu participación
               </h2>
               <p className="text-xs text-rf-texto/40">
-                Completá el formulario con los datos de tu factura. Una participación por factura.
+                Completá el formulario con el cupón entregado junto con tu factura
               </p>
             </div>
 
@@ -106,7 +106,7 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
             </div>
 
             <p className="text-center text-rf-texto/25 text-[11px] mt-5 leading-relaxed">
-              Solo mayores de 18 años. Válido en todo el territorio argentino.
+              Sólo mayores de 18 años. Válido en todo el territorio argentino.
             </p>
           </motion.div>
         </div>

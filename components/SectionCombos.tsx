@@ -64,7 +64,7 @@ export default function SectionCombos() {
         
                   <FadeIn delay={0.15}>
                     <p className="text-rf-texto/50 text-center mt-6 text-sm leading-relaxed mb-8">
-                      Consumiendo una Sugerencia del Chef o un MENÚ KIDS te llevas un vaso de regalo
+                      Consumiendo un MENÚ KIDS te llevas un vaso de regalo
                     </p>
                   </FadeIn>
       </div>

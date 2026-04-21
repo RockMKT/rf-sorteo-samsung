@@ -24,7 +24,7 @@ interface FormData {
   nombre: string
   email: string
   telefono: string
-  dni: string
+  fecha_nacimiento: string
   numero_factura: string
   canal: string
   palabra: string
@@ -35,7 +35,7 @@ const EMPTY: FormData = {
   nombre: '',
   email: '',
   telefono: '',
-  dni: '',
+  fecha_nacimiento: '',
   numero_factura: '',
   canal: '',
   palabra: '',
@@ -80,7 +80,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           nombre: form.nombre,
           email: form.email,
           telefono: form.telefono,
-          dni: form.dni,
+          fecha_nacimiento: form.fecha_nacimiento,
           numero_factura: form.numero_factura,
           canal: form.canal,
           palabra: form.palabra,
@@ -161,18 +161,17 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           />
         </div>
         <div>
-          <label htmlFor="dni" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
-            DNI <span className="text-red-400">*</span>
+          <label htmlFor="fecha_nacimiento" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
+            Fecha de nacimiento <span className="text-red-400">*</span>
           </label>
           <input
-            id="dni"
-            type="text"
-            name="dni"
-            value={form.dni}
+            id="fecha_nacimiento"
+            type="date"
+            name="fecha_nacimiento"
+            value={form.fecha_nacimiento}
             onChange={handleChange}
-            placeholder="Ingresá tu DNI"
             required
-            inputMode="numeric"
+            max={new Date().toISOString().split('T')[0]}
             className="input-rf"
           />
         </div>
@@ -181,7 +180,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
       {/* Número de factura */}
       <div>
         <label htmlFor="numero_factura" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
-          N° de factura <span className="text-red-400">*</span>
+          Código de cupón <span className="text-red-400">*</span>
         </label>
         <input
           id="numero_factura"

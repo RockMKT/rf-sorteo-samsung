@@ -52,7 +52,7 @@ export default function SectionGiftCard() {
 
           <FadeIn delay={0.15}>
             <p className="text-rf-texto/50 text-sm leading-relaxed mb-8">
-              Disfruta un combo mundialista exclusivo. Llevamos el rock a tu casa. Pedí por PedidosYa.
+              Disfruta un combo mundialista exclusivo. Llevamos el rock a tu casa. <br /> Pedí por PedidosYa.
             </p>
           </FadeIn>
 
