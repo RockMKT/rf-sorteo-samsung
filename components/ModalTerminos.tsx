@@ -51,7 +51,7 @@ export default function ModalTerminos({ onClose }: Props) {
         {/* Contenido scrolleable */}
         <div className="overflow-y-auto flex-1 text-sm text-rf-texto/70 space-y-4 pr-1">
           <p className="text-[10px] font-display uppercase tracking-widest text-rf-dorado/50 mb-4">
-            Bases del sorteo — Samsung
+            Bases del sorteo
           </p>
 
           <p>
@@ -94,11 +94,6 @@ export default function ModalTerminos({ onClose }: Props) {
             <span className="font-display text-rf-dorado text-xs mr-2">7.</span>
             Los datos personales recopilados serán utilizados exclusivamente a los fines de este
             sorteo, en cumplimiento de la Ley 25.326 de Protección de Datos Personales.
-          </p>
-
-          {/* TODO: completar bases legales con el equipo de RF */}
-          <p className="text-rf-texto/30 text-xs italic border-t border-rf-dorado/10 pt-3 mt-2">
-            [TODO: completar bases legales con el equipo de RF — fecha de cierre, número de DGCOT, etc.]
           </p>
         </div>
 

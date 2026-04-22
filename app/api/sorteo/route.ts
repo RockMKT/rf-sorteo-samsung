@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
+import { neon } from '@neondatabase/serverless'
+import sgMail from '@sendgrid/mail'
+
+const TEMPLATE_ID = 'd-6913d2e495874fff8ea194ee7f6c5449'
+const FROM_EMAIL = 'noreply@rockandfellersba.com.ar'
 
 export async function POST(req: NextRequest) {
-  // Inicialización lazy para que el build no falle sin variables de entorno
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  )
   try {
     const body = await req.json()
-    const { nombre, email, telefono, dni, numero_factura, canal, palabra } = body
+    const { nombre, email, telefono, fecha_nacimiento, numero_factura, sucursal } = body
 
-    if (!nombre || !email || !telefono || !dni || !numero_factura || !canal || !palabra) {
+    if (!nombre || !email || !telefono || !fecha_nacimiento || !numero_factura || !sucursal) {
       return NextResponse.json(
         { error: 'Todos los campos son obligatorios.' },
         { status: 400 }
@@ -26,11 +25,13 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const { data: existingEmail } = await supabase
-      .from('participantes')
-      .select('id')
-      .eq('email', email.toLowerCase().trim())
-      .maybeSingle()
+    const sql = neon(process.env.DATABASE_URL!)
+
+    const [existingEmail] = await sql`
+      SELECT id FROM participantes
+      WHERE email = ${email.toLowerCase().trim()}
+      LIMIT 1
+    `
 
     if (existingEmail) {
       return NextResponse.json(
@@ -39,11 +40,11 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const { data: existingFactura } = await supabase
-      .from('participantes')
-      .select('id')
-      .eq('numero_factura', numero_factura.trim())
-      .maybeSingle()
+    const [existingFactura] = await sql`
+      SELECT id FROM participantes
+      WHERE numero_factura = ${numero_factura.trim()}
+      LIMIT 1
+    `
 
     if (existingFactura) {
       return NextResponse.json(
@@ -52,27 +53,30 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const { error: insertError } = await supabase
-      .from('participantes')
-      .insert([
-        {
-          nombre: nombre.trim(),
-          email: email.toLowerCase().trim(),
-          telefono: telefono.trim(),
-          dni: dni.trim(),
-          numero_factura: numero_factura.trim(),
-          canal,
-          palabra,
-        },
-      ])
-
-    if (insertError) {
-      console.error('Supabase insert error:', insertError)
-      return NextResponse.json(
-        { error: 'No pudimos registrar tu participación. Intentá de nuevo.' },
-        { status: 500 }
+    await sql`
+      INSERT INTO participantes (nombre, email, telefono, fecha_nacimiento, numero_factura, sucursal)
+      VALUES (
+        ${nombre.trim()},
+        ${email.toLowerCase().trim()},
+        ${telefono.trim()},
+        ${fecha_nacimiento},
+        ${numero_factura.trim()},
+        ${sucursal}
       )
-    }
+    `
+
+    sgMail.setApiKey(process.env.SENDGRID!)
+    await sgMail.send({
+      to: email.toLowerCase().trim(),
+      from: FROM_EMAIL,
+      templateId: TEMPLATE_ID,
+      dynamicTemplateData: {
+        nombre: nombre.trim(),
+        email: email.toLowerCase().trim(),
+        sucursal,
+        numero_factura: numero_factura.trim(),
+      },
+    })
 
     return NextResponse.json({ success: true }, { status: 201 })
   } catch (err) {

@@ -65,10 +65,8 @@ export default function SectionGiftCard() {
           </FadeIn>
 
           <FadeIn delay={0.25}>
-            {/* TODO: agregar href real cuando esté el link de compra */}
             <a
-              href="#"
-              onClick={e => e.preventDefault()}
+              href="https://rockandfellers.com.ar/gift-cards" target='blank'
               className="inline-block px-8 py-3 font-display text-sm uppercase tracking-widest bg-rf-dorado text-rf-negro hover:bg-rf-dorado hover:text-rf-negro transition-all duration-200"
             >
               Comprar

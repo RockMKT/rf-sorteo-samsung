@@ -39,7 +39,7 @@ export default function Footer({ onTerminosClick }: Props) {
             Reservas
           </h3>
           <p className="text-rf-texto/45 text-sm leading-relaxed">
-            Reservá en Rock&Feller's
+            <a href="https://rockandfellers.com.ar">Reservá en Rock&Feller's</a>
           </p>
         </div>
 

@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Sorteo Samsung | Rock&Feller\'s',
-  description: 'Participá en el sorteo de un Samsung en Rock&Feller\'s. Registrá tu factura y entrá.',
+  title: 'Rock&Feller\'s | Sorteo Smart TV',
+  description: 'Participá en el sorteo por un Smart TV 98" en Rock&Feller\'s. Registrá tu factura y entrá.',
   openGraph: {
-    title: 'Sorteo Samsung | Rock&Feller\'s',
-    description: 'Registrá tu factura y participá por un Samsung.',
+    title: 'Rock&Feller\'s | Sorteo Smart TV',
+    description: 'Registrá tu código de cupón y participá.',
     siteName: 'Rock&Feller\'s',
     locale: 'es_AR',
     type: 'website',

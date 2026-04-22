@@ -5,10 +5,9 @@ create table if not exists participantes (
   nombre text not null,
   email text not null,
   telefono text not null,
-  dni text not null,
+  fecha_nacimiento date not null,
   numero_factura text not null,
-  canal text not null,   -- cómo conoció Rock&Feller's
-  palabra text not null, -- palabra asociada a Rock&Feller's
+  sucursal text not null,
 
   constraint participantes_email_unique unique (email),
   constraint participantes_factura_unique unique (numero_factura)
@@ -29,5 +28,4 @@ create policy "allow_insert" on participantes
 create index on participantes (email);
 create index on participantes (numero_factura);
 create index on participantes (created_at desc);
-create index on participantes (canal);
-create index on participantes (palabra);
+create index on participantes (sucursal);

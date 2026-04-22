@@ -11,17 +11,17 @@ const SUCURSALES_BA = [
   {
     nombre: 'Pilar',
     direccion: 'KM 50 | Complejo Hey Add Center',
-    href: '#', // TODO: link PedidosYa Pilar
+    href: 'https://www.pedidosya.com.ar/restaurantes/pilar/rock-fellers-pilar-menu?search=rock', // TODO: link PedidosYa Pilar
   },
   {
     nombre: 'Unicenter',
     direccion: 'Unicenter Shopping',
-    href: '#', // TODO: link PedidosYa Unicenter
+    href: 'https://www.pedidosya.com.ar/restaurantes/san-isidro/rock--fellers-martinez-eeb556c4-f8fc-4977-8f67-1741fd2ce6e0-menu?origin=shop_list', // TODO: link PedidosYa Unicenter
   },
   {
     nombre: 'Palermo',
     direccion: 'Av. Dorrego esq. Libertador | Paseo OLA',
-    href: '#', // TODO: link PedidosYa Palermo
+    href: 'https://www.pedidosya.com.ar/restaurantes/buenos-aires/rock--fellers--palermo-a9253a71-a49a-464f-890a-12af4f5d9809-menu', // TODO: link PedidosYa Palermo
   },
 ]
 

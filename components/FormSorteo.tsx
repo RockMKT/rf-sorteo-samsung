@@ -2,23 +2,20 @@
 
 import { useState } from 'react'
 
-const CANALES = [
-  { value: 'instagram', label: 'Instagram' },
-  { value: 'facebook', label: 'Facebook' },
-  { value: 'tiktok', label: 'TikTok' },
-  { value: 'amigo', label: 'Recomendación de un amigo/a' },
-  { value: 'google', label: 'Google' },
-  { value: 'ya-cliente', label: 'Ya era cliente' },
-  { value: 'pase', label: 'Pasé por el local' },
-  { value: 'otro', label: 'Otro' },
-]
-
-const PALABRAS = ['Innovación', 'Confiable', 'Tradición', 'Accesible', 'Estética']
 
 interface Props {
   onSuccess: (data: { nombre: string; email: string }) => void
   onTerminosClick: () => void
 }
+
+const SUCURSALES = [
+  { value: 'pilar', label: 'Pilar' },
+  { value: 'unicenter', label: 'Unicenter' },
+  { value: 'palermo', label: 'Palermo' },
+  { value: 'orono', label: 'Oroño' },
+  { value: 'alto-rosario', label: 'Alto Rosario' },
+  { value: 'savoy', label: 'Savoy' },
+]
 
 interface FormData {
   nombre: string
@@ -26,8 +23,7 @@ interface FormData {
   telefono: string
   fecha_nacimiento: string
   numero_factura: string
-  canal: string
-  palabra: string
+  sucursales: string
   acepta_terminos: boolean
 }
 
@@ -37,8 +33,7 @@ const EMPTY: FormData = {
   telefono: '',
   fecha_nacimiento: '',
   numero_factura: '',
-  canal: '',
-  palabra: '',
+  sucursales: '',
   acepta_terminos: false,
 }
 
@@ -54,11 +49,6 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
     }))
-  }
-
-  const handlePalabra = (palabra: string) => {
-    setErrorMsg(null)
-    setForm(prev => ({ ...prev, palabra }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -82,8 +72,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           telefono: form.telefono,
           fecha_nacimiento: form.fecha_nacimiento,
           numero_factura: form.numero_factura,
-          canal: form.canal,
-          palabra: form.palabra,
+          sucursal: form.sucursales,
         }),
       })
 
@@ -197,22 +186,22 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
         </p>
       </div>
 
-      {/* Canal de descubrimiento */}
+      {/* Sucursal */}
       <div>
-        <label htmlFor="canal" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
-          ¿Por dónde conociste Rock&amp;Feller's? <span className="text-red-400">*</span>
+        <label htmlFor="sucursales" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
+          Sucursal dónde consumiste <span className="text-red-400">*</span>
         </label>
         <div className="relative">
           <select
-            id="canal"
-            name="canal"
-            value={form.canal}
+            id="sucursales"
+            name="sucursales"
+            value={form.sucursales}
             onChange={handleChange}
             required
             className="input-rf appearance-none pr-10 cursor-pointer"
           >
-            <option value="" disabled>Seleccioná una opción</option>
-            {CANALES.map(({ value, label }) => (
+            <option value="" disabled>Seleccioná una sucursal</option>
+            {SUCURSALES.map(({ value, label }) => (
               <option key={value} value={value}>{label}</option>
             ))}
           </select>
@@ -221,31 +210,6 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
             </svg>
           </div>
-        </div>
-      </div>
-
-      {/* Palabra de asociación */}
-      <div>
-        <p className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-2">
-          ¿Con qué palabra asociás a Rock&amp;Feller's? <span className="text-red-400">*</span>
-        </p>
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Palabra asociada a Rock&Feller's">
-          {PALABRAS.map(p => (
-            <button
-              key={p}
-              type="button"
-              onClick={() => handlePalabra(p)}
-              aria-pressed={form.palabra === p}
-              className={[
-                'px-4 py-2 text-xs font-display uppercase tracking-wider border transition-all duration-150',
-                form.palabra === p
-                  ? 'bg-rf-dorado text-rf-negro border-rf-dorado'
-                  : 'bg-transparent text-rf-texto/60 border-rf-dorado/20 hover:border-rf-dorado/50 hover:text-rf-texto',
-              ].join(' ')}
-            >
-              {p}
-            </button>
-          ))}
         </div>
       </div>
 

@@ -5,7 +5,7 @@ import FadeIn from './FadeIn'
 import { useState } from 'react'
 import ModalPedidoBA from './ModalPedidoBA'
 
-const PEDIDOS_YA_ROSARIO = '#'
+const PEDIDOS_YA_ROSARIO = 'https://www.pedidosya.com.ar/restaurantes/rosario/rock-and-fellers-orono-855a421f-11ff-4a91-8201-cc50e56f2c59-menu'
 
 
 export default function SectionGiftCard() {
