@@ -112,8 +112,9 @@ export default function ModalConfirmacion({ nombre, email, onClose }: Props) {
           registrada exitosamente.
         </p>
         <p className="text-rf-texto/50 text-sm mb-6">
-          Te enviamos los detalles a{' '}. (Te sugerimos revisar casillas de promoción y spam en caso de no encontrar el correo.)
-          <span className="text-rf-texto/80">{email}</span>
+          Te enviamos los detalles a{' '}
+          <span className="text-rf-texto/80">{email}</span>.{' '}
+          (Te sugerimos revisar casillas de promoción y spam en caso de no encontrar el correo.)
         </p>
 
         {/* Carrusel */}

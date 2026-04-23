@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
 
     if (existingFactura) {
       return NextResponse.json(
-        { error: 'Este número de factura ya fue registrado.' },
+        { error: 'Este número de cupón ya fue registrado.' },
         { status: 409 }
       )
     }
@@ -65,22 +65,37 @@ export async function POST(req: NextRequest) {
       )
     `
 
-    sgMail.setApiKey(process.env.SENDGRID!)
-    await sgMail.send({
-      to: email.toLowerCase().trim(),
-      from: FROM_EMAIL,
-      templateId: TEMPLATE_ID,
-      dynamicTemplateData: {
-        nombre: nombre.trim(),
-        email: email.toLowerCase().trim(),
-        sucursal,
-        numero_factura: numero_factura.trim(),
-      },
-    })
+    if (process.env.SENDGRID) {
+      try {
+        sgMail.setApiKey(process.env.SENDGRID)
+        await sgMail.send({
+          to: email.toLowerCase().trim(),
+          from: FROM_EMAIL,
+          templateId: TEMPLATE_ID,
+          dynamicTemplateData: {
+            nombre: nombre.trim(),
+            email: email.toLowerCase().trim(),
+            sucursal,
+            numero_factura: numero_factura.trim(),
+          },
+        })
+      } catch (mailErr: unknown) {
+        try {
+          const sgErr = mailErr as { response?: { body?: unknown }; message?: string }
+          const detail = sgErr?.response?.body ?? sgErr?.message ?? String(mailErr)
+          console.error('SendGrid error:', JSON.stringify(detail))
+        } catch {
+          console.error('SendGrid error (no se pudo serializar):', String(mailErr))
+        }
+      }
+    } else {
+      console.warn('Variable SENDGRID no configurada — se omite el envío de email')
+    }
 
     return NextResponse.json({ success: true }, { status: 201 })
-  } catch (err) {
-    console.error('Unexpected error in /api/sorteo:', err)
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? `${err.name}: ${err.message}` : String(err)
+    console.error('Unexpected error in /api/sorteo:', msg)
     return NextResponse.json(
       { error: 'Ocurrió un error inesperado. Por favor intentá más tarde.' },
       { status: 500 }
