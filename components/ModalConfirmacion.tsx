@@ -18,7 +18,7 @@ const PROMOS: Promo[] = [
     buttonHref: 'https://rockandfellers.com.ar/gift-cards/experience',
   },
   {
-    image: '/vaso 2.png',
+    image: '/vasos.png',
     title: 'NUEVOS VASOS MUNDIALES',
   },
 ]
@@ -132,7 +132,7 @@ export default function ModalConfirmacion({ nombre, email, onClose }: Props) {
                 transition={{ duration: 0.3, ease: 'easeInOut' }}
                 src={promo.image}
                 alt={promo.title}
-                className="absolute inset-0 w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-contain"
               />
             </AnimatePresence>
 
