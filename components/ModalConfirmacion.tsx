@@ -18,8 +18,8 @@ const PROMOS: Promo[] = [
     buttonHref: 'https://rockandfellers.com.ar/gift-cards/experience',
   },
   {
-    image: '/televisor98.png',
-    title: 'VASOS MUNDIALES',
+    image: '/vaso 2.png',
+    title: 'NUEVOS VASOS MUNDIALES',
   },
 ]
 

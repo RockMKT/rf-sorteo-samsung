@@ -61,8 +61,8 @@ export default function ModalTerminos({ onClose }: Props) {
 
           <p>
             <span className="font-display text-rf-dorado text-xs mr-2">2.</span>
-            Cada factura válida emitida en cualquier sucursal de Rock&amp;Feller's otorga una (1)
-            participación en el sorteo.
+            Cada factura válida emitida en cualquier sucursal de Rock&Feller's otorga
+            participaciones correspondientes a la cantidad de Clientes en mesa en el momento de consumición.
           </p>
 
           <p>
@@ -73,19 +73,18 @@ export default function ModalTerminos({ onClose }: Props) {
 
           <p>
             <span className="font-display text-rf-dorado text-xs mr-2">4.</span>
-            El premio no es transferible, canjeable por dinero en efectivo ni por otros productos
-            o servicios.
+            El sorteo tendrá como premio 1 Smart TV de 98”. Características técnicas del producto serán definidos por la organización según disponibilidad comercial al momento de adquisición del mismo. La imagen, descripción o referencia visual utilizada en piezas de comunicación será meramente ilustrativa y no implicará compromiso sobre un modelo específico. El premio no podrá ser transferido, canjeado por dinero en efectivo ni reemplazado por otros productos a solicitud del ganador.
           </p>
 
           <p>
             <span className="font-display text-rf-dorado text-xs mr-2">5.</span>
-            Cada número de factura puede ser registrado una única vez. Los datos ingresados deben
+            Cada número de cupón puede ser registrado una única vez. Los datos ingresados deben
             ser verídicos.
           </p>
 
           <p>
             <span className="font-display text-rf-dorado text-xs mr-2">6.</span>
-            Rock&amp;Feller's se reserva el derecho de verificar la autenticidad de las facturas
+            Rock&Feller's se reserva el derecho de verificar la autenticidad de los cupones
             presentadas. En caso de detectar datos falsos o manipulados, la participación será
             descalificada.
           </p>

@@ -28,8 +28,7 @@ export default function Footer({ onTerminosClick }: Props) {
             Sobre Rock&amp;Feller's
           </h3>
           <p className="text-rf-texto/45 text-sm leading-relaxed">
-            Rock&amp;Feller's es el lugar donde el rock americano y la buena mesa se
-            encuentran. Sucursales en Buenos Aires y Rosario.{' '}
+            Rock&Feller's nace del espíritu emprendedor de sus fundadores, que soñaron un moderno restaurant y bar americano con un ambiente casual, cómodo y divertido. Un lugar único que combina gastronomía, arquitectura, tecnología y música con la mística del rock and roll.
           </p>
         </div>
 

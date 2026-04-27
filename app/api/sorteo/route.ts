@@ -27,19 +27,6 @@ export async function POST(req: NextRequest) {
 
     const sql = neon(process.env.DATABASE_URL!)
 
-    const [existingEmail] = await sql`
-      SELECT id FROM participantes
-      WHERE email = ${email.toLowerCase().trim()}
-      LIMIT 1
-    `
-
-    if (existingEmail) {
-      return NextResponse.json(
-        { error: 'Este email ya fue registrado en el sorteo.' },
-        { status: 409 }
-      )
-    }
-
     const [existingFactura] = await sql`
       SELECT id FROM participantes
       WHERE numero_factura = ${numero_factura.trim()}
