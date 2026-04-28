@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSearchParams } from 'next/navigation'
 import { SUCURSALES, validateForm, type FormErrors } from '@/lib/validation'
 
 interface Props {
@@ -34,10 +35,18 @@ function FieldError({ message }: { message?: string }) {
 }
 
 export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
+  const searchParams = useSearchParams()
   const [form, setForm] = useState<FormData>(EMPTY)
   const [isLoading, setIsLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
   const [fieldErrors, setFieldErrors] = useState<FormErrors>({})
+
+  useEffect(() => {
+    const coupon = searchParams.get('coupon')
+    if (coupon) {
+      setForm(prev => ({ ...prev, numero_factura: coupon }))
+    }
+  }, [searchParams])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import Image from 'next/image'
 import HeroSection from '@/components/HeroSection'
 import SectionCombos from '@/components/SectionCombos'
@@ -13,6 +13,14 @@ import ModalConfirmacion from '@/components/ModalConfirmacion'
 import ModalTerminos from '@/components/ModalTerminos'
 
 export default function Home() {
+  return (
+    <Suspense>
+      <HomeContent />
+    </Suspense>
+  )
+}
+
+function HomeContent() {
   const [modalConfirmacionOpen, setModalConfirmacionOpen] = useState(false)
   const [modalTerminosOpen, setModalTerminosOpen] = useState(false)
   const [confirmData, setConfirmData] = useState<{ nombre: string; email: string }>({
