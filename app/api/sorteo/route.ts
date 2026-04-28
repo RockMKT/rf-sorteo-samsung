@@ -1,5 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { neon } from '@neondatabase/serverless'
+import pool from '@/lib/db'
+import {
+  validateNombre,
+  validateEmail,
+  validateTelefono,
+  validateFechaNacimiento,
+  validateNumeroFactura,
+  validateSucursal,
+  type FormErrors,
+} from '@/lib/validation'
 import sgMail from '@sendgrid/mail'
 
 const TEMPLATE_ID = 'd-6913d2e495874fff8ea194ee7f6c5449'
@@ -10,60 +19,86 @@ export async function POST(req: NextRequest) {
     const body = await req.json()
     const { nombre, email, telefono, fecha_nacimiento, numero_factura, sucursal } = body
 
-    if (!nombre || !email || !telefono || !fecha_nacimiento || !numero_factura || !sucursal) {
+    // Server-side field validation
+    const errors: FormErrors = {}
+
+    const errNombre = validateNombre(nombre ?? '')
+    if (errNombre) errors.nombre = errNombre
+
+    const errEmail = validateEmail(email ?? '')
+    if (errEmail) errors.email = errEmail
+
+    const errTelefono = validateTelefono(telefono ?? '')
+    if (errTelefono) errors.telefono = errTelefono
+
+    const errFecha = validateFechaNacimiento(fecha_nacimiento ?? '')
+    if (errFecha) errors.fecha_nacimiento = errFecha
+
+    const errFactura = validateNumeroFactura(numero_factura ?? '')
+    if (errFactura) errors.numero_factura = errFactura
+
+    const errSucursal = validateSucursal(sucursal ?? '')
+    if (errSucursal) errors.sucursal = errSucursal
+
+    if (Object.keys(errors).length > 0) {
+      const firstError = Object.values(errors)[0]
       return NextResponse.json(
-        { error: 'Todos los campos son obligatorios.' },
+        { error: firstError, errors },
         { status: 400 }
       )
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
+    const trimmedCoupon = numero_factura.trim()
+    const trimmedEmail = email.toLowerCase().trim()
+    const trimmedNombre = nombre.trim()
+    const trimmedTelefono = telefono.trim()
+
+    // Check coupon code exists
+    const couponResult = await pool.query(
+      'SELECT id FROM coupon_codes WHERE code = $1',
+      [trimmedCoupon]
+    )
+
+    if (couponResult.rows.length === 0) {
       return NextResponse.json(
-        { error: 'El email ingresado no es válido.' },
+        { error: 'El código de cupón ingresado no es válido.', errors: { numero_factura: 'El código de cupón ingresado no es válido.' } },
         { status: 400 }
       )
     }
 
-    const sql = neon(process.env.DATABASE_URL!)
+    // Check coupon not already used
+    const existingResult = await pool.query(
+      'SELECT id FROM raffle_participants WHERE coupon_code = $1',
+      [trimmedCoupon]
+    )
 
-    const [existingFactura] = await sql`
-      SELECT id FROM participantes
-      WHERE numero_factura = ${numero_factura.trim()}
-      LIMIT 1
-    `
-
-    if (existingFactura) {
+    if (existingResult.rows.length > 0) {
       return NextResponse.json(
-        { error: 'Este número de cupón ya fue registrado.' },
+        { error: 'Este código de cupón ya fue registrado.', errors: { numero_factura: 'Este código de cupón ya fue registrado.' } },
         { status: 409 }
       )
     }
 
-    await sql`
-      INSERT INTO participantes (nombre, email, telefono, fecha_nacimiento, numero_factura, sucursal)
-      VALUES (
-        ${nombre.trim()},
-        ${email.toLowerCase().trim()},
-        ${telefono.trim()},
-        ${fecha_nacimiento},
-        ${numero_factura.trim()},
-        ${sucursal}
-      )
-    `
+    // Insert participant
+    await pool.query(
+      `INSERT INTO raffle_participants (name, email, phone, date_of_birth, coupon_code, subsidiary)
+       VALUES ($1, $2, $3, $4, $5, $6)`,
+      [trimmedNombre, trimmedEmail, trimmedTelefono, fecha_nacimiento, trimmedCoupon, sucursal]
+    )
 
+    // Send confirmation email
     if (process.env.SENDGRID) {
       try {
         sgMail.setApiKey(process.env.SENDGRID)
         await sgMail.send({
-          to: email.toLowerCase().trim(),
+          to: trimmedEmail,
           from: FROM_EMAIL,
           templateId: TEMPLATE_ID,
           dynamicTemplateData: {
-            nombre: nombre.trim(),
-            email: email.toLowerCase().trim(),
+            nombre: trimmedNombre,
+            email: trimmedEmail,
             sucursal,
-            numero_factura: numero_factura.trim(),
+            numero_factura: trimmedCoupon,
           },
         })
       } catch (mailErr: unknown) {

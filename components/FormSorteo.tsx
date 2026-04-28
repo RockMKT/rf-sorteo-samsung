@@ -1,21 +1,12 @@
 'use client'
 
 import { useState } from 'react'
-
+import { SUCURSALES, validateForm, type FormErrors } from '@/lib/validation'
 
 interface Props {
   onSuccess: (data: { nombre: string; email: string }) => void
   onTerminosClick: () => void
 }
-
-const SUCURSALES = [
-  { value: 'pilar', label: 'Pilar' },
-  { value: 'unicenter', label: 'Unicenter' },
-  { value: 'palermo', label: 'Palermo' },
-  { value: 'orono', label: 'Oroño' },
-  { value: 'alto-rosario', label: 'Alto Rosario' },
-  { value: 'savoy', label: 'Savoy' },
-]
 
 interface FormData {
   nombre: string
@@ -37,14 +28,21 @@ const EMPTY: FormData = {
   acepta_terminos: false,
 }
 
+function FieldError({ message }: { message?: string }) {
+  if (!message) return null
+  return <p className="text-red-400 text-[11px] mt-1 pl-1">{message}</p>
+}
+
 export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
   const [form, setForm] = useState<FormData>(EMPTY)
   const [isLoading, setIsLoading] = useState(false)
   const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<FormErrors>({})
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target
     setErrorMsg(null)
+    setFieldErrors(prev => ({ ...prev, [name]: undefined }))
     setForm(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
@@ -54,13 +52,27 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    if (!form.acepta_terminos) {
-      setErrorMsg('Tenés que aceptar los términos y condiciones para participar.')
+    // Client-side validation
+    const errors = validateForm({
+      nombre: form.nombre,
+      email: form.email,
+      telefono: form.telefono,
+      fecha_nacimiento: form.fecha_nacimiento,
+      numero_factura: form.numero_factura,
+      sucursal: form.sucursales,
+      acepta_terminos: form.acepta_terminos,
+    })
+
+    if (errors) {
+      setFieldErrors(errors)
+      const firstError = Object.values(errors)[0]
+      if (firstError) setErrorMsg(firstError)
       return
     }
 
     setIsLoading(true)
     setErrorMsg(null)
+    setFieldErrors({})
 
     try {
       const res = await fetch('/api/sorteo', {
@@ -80,11 +92,15 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
 
       if (!res.ok) {
         setErrorMsg(data.error ?? 'Ocurrió un error. Por favor intentá de nuevo.')
+        if (data.errors) {
+          setFieldErrors(data.errors)
+        }
         return
       }
 
       const submitted = { nombre: form.nombre, email: form.email }
       setForm(EMPTY)
+      setFieldErrors({})
       onSuccess(submitted)
     } catch {
       setErrorMsg('Ocurrió un error inesperado. Por favor intentá más tarde.')
@@ -108,9 +124,11 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           onChange={handleChange}
           placeholder="Ingresá tu nombre"
           required
+          maxLength={100}
           autoComplete="name"
           className="input-rf"
         />
+        <FieldError message={fieldErrors.nombre} />
       </div>
 
       {/* Email */}
@@ -129,9 +147,10 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           autoComplete="email"
           className="input-rf"
         />
+        <FieldError message={fieldErrors.email} />
       </div>
 
-      {/* Teléfono + DNI */}
+      {/* Teléfono + Fecha de nacimiento */}
       <div className="grid grid-cols-2 gap-3">
         <div>
           <label htmlFor="telefono" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
@@ -145,9 +164,11 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
             onChange={handleChange}
             placeholder="Teléfono"
             required
+            maxLength={20}
             autoComplete="tel"
             className="input-rf"
           />
+          <FieldError message={fieldErrors.telefono} />
         </div>
         <div>
           <label htmlFor="fecha_nacimiento" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
@@ -163,10 +184,11 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
             max={new Date().toISOString().split('T')[0]}
             className="input-rf"
           />
+          <FieldError message={fieldErrors.fecha_nacimiento} />
         </div>
       </div>
 
-      {/* Número de factura */}
+      {/* Código de cupón */}
       <div>
         <label htmlFor="numero_factura" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
           Código de cupón <span className="text-red-400">*</span>
@@ -179,8 +201,10 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           onChange={handleChange}
           placeholder="Ej: 0001-00012345"
           required
+          maxLength={15}
           className="input-rf"
         />
+        <FieldError message={fieldErrors.numero_factura} />
         <p className="text-[11px] text-rf-texto/30 mt-1 pl-1">
           Encontrás el número en la parte superior de tu factura.
         </p>
@@ -211,6 +235,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
             </svg>
           </div>
         </div>
+        <FieldError message={fieldErrors.sucursal} />
       </div>
 
       {/* Términos */}
@@ -235,6 +260,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           del sorteo y autorizo el uso de mis datos personales (Ley 25.326).
         </label>
       </div>
+      <FieldError message={fieldErrors.acepta_terminos} />
 
       {/* Error */}
       {errorMsg && (
