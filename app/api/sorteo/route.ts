@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import pool from '@/lib/db'
 import {
+  sanitize,
   validateNombre,
   validateEmail,
   validateTelefono,
@@ -9,6 +10,7 @@ import {
   validateSucursal,
   type FormErrors,
 } from '@/lib/validation'
+import { isRateLimited } from '@/lib/rate-limit'
 import sgMail from '@sendgrid/mail'
 
 const TEMPLATE_ID = 'd-6913d2e495874fff8ea194ee7f6c5449'
@@ -16,28 +18,64 @@ const FROM_EMAIL = 'noreply@rockandfellersba.com.ar'
 
 export async function POST(req: NextRequest) {
   try {
+    // Rate limiting
+    const ip =
+      req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ??
+      req.headers.get('x-real-ip') ??
+      'unknown'
+
+    if (isRateLimited(ip)) {
+      return NextResponse.json(
+        { error: 'Demasiados intentos. Por favor esperá un momento antes de intentar de nuevo.' },
+        { status: 429 }
+      )
+    }
+
     const body = await req.json()
     const { nombre, email, telefono, fecha_nacimiento, numero_factura, sucursal } = body
+
+    // Type guard — reject non-string values
+    if (
+      typeof nombre !== 'string' ||
+      typeof email !== 'string' ||
+      typeof telefono !== 'string' ||
+      typeof fecha_nacimiento !== 'string' ||
+      typeof numero_factura !== 'string' ||
+      typeof sucursal !== 'string'
+    ) {
+      return NextResponse.json(
+        { error: 'Datos inválidos.' },
+        { status: 400 }
+      )
+    }
+
+    // Sanitize inputs (strip control characters)
+    const sNombre = sanitize(nombre)
+    const sEmail = sanitize(email)
+    const sTelefono = sanitize(telefono)
+    const sFecha = sanitize(fecha_nacimiento)
+    const sFactura = sanitize(numero_factura)
+    const sSucursal = sanitize(sucursal)
 
     // Server-side field validation
     const errors: FormErrors = {}
 
-    const errNombre = validateNombre(nombre ?? '')
+    const errNombre = validateNombre(sNombre)
     if (errNombre) errors.nombre = errNombre
 
-    const errEmail = validateEmail(email ?? '')
+    const errEmail = validateEmail(sEmail)
     if (errEmail) errors.email = errEmail
 
-    const errTelefono = validateTelefono(telefono ?? '')
+    const errTelefono = validateTelefono(sTelefono)
     if (errTelefono) errors.telefono = errTelefono
 
-    const errFecha = validateFechaNacimiento(fecha_nacimiento ?? '')
+    const errFecha = validateFechaNacimiento(sFecha)
     if (errFecha) errors.fecha_nacimiento = errFecha
 
-    const errFactura = validateNumeroFactura(numero_factura ?? '')
+    const errFactura = validateNumeroFactura(sFactura)
     if (errFactura) errors.numero_factura = errFactura
 
-    const errSucursal = validateSucursal(sucursal ?? '')
+    const errSucursal = validateSucursal(sSucursal)
     if (errSucursal) errors.sucursal = errSucursal
 
     if (Object.keys(errors).length > 0) {
@@ -48,10 +86,10 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const trimmedCoupon = numero_factura.trim()
-    const trimmedEmail = email.toLowerCase().trim()
-    const trimmedNombre = nombre.trim()
-    const trimmedTelefono = telefono.trim()
+    const trimmedCoupon = sFactura
+    const trimmedEmail = sEmail.toLowerCase()
+    const trimmedNombre = sNombre
+    const trimmedTelefono = sTelefono
 
     // Check coupon code exists
     const couponResult = await pool.query(
@@ -83,7 +121,7 @@ export async function POST(req: NextRequest) {
     await pool.query(
       `INSERT INTO raffle_participants (name, email, phone, date_of_birth, coupon_code, subsidiary)
        VALUES ($1, $2, $3, $4, $5, $6)`,
-      [trimmedNombre, trimmedEmail, trimmedTelefono, fecha_nacimiento, trimmedCoupon, sucursal]
+      [trimmedNombre, trimmedEmail, trimmedTelefono, sFecha, trimmedCoupon, sSucursal]
     )
 
     // Send confirmation email
@@ -97,7 +135,7 @@ export async function POST(req: NextRequest) {
           dynamicTemplateData: {
             nombre: trimmedNombre,
             email: trimmedEmail,
-            sucursal,
+            sucursal: sSucursal,
             numero_factura: trimmedCoupon,
           },
         })

@@ -1,3 +1,9 @@
+/** Strips control characters and trims. Returns '' for non-string inputs. */
+export function sanitize(value: unknown): string {
+  if (typeof value !== 'string') return ''
+  return value.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, '').trim()
+}
+
 export const SUCURSALES = [
   { value: 'pilar', label: 'Pilar' },
   { value: 'unicenter', label: 'Unicenter' },
@@ -32,6 +38,7 @@ export function validateNombre(value: string): string | null {
 export function validateEmail(value: string): string | null {
   const v = value.trim()
   if (!v) return 'El email es obligatorio.'
+  if (v.length > 254) return 'El email no puede superar los 254 caracteres.'
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
     return 'El email ingresado no es válido.'
   }
@@ -42,16 +49,23 @@ export function validateTelefono(value: string): string | null {
   const v = value.trim()
   if (!v) return 'El teléfono es obligatorio.'
   if (v.length > 20) return 'El teléfono no puede superar los 20 caracteres.'
+  if (!/^[\d\s\-+()]+$/.test(v)) {
+    return 'El teléfono solo puede contener números, espacios, guiones y paréntesis.'
+  }
   return null
 }
 
 export function validateFechaNacimiento(value: string): string | null {
   if (!value) return 'La fecha de nacimiento es obligatoria.'
-  const date = new Date(value)
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return 'La fecha de nacimiento no es válida.'
+  const date = new Date(value + 'T00:00:00')
   if (isNaN(date.getTime())) return 'La fecha de nacimiento no es válida.'
   const today = new Date()
   today.setHours(0, 0, 0, 0)
   if (date > today) return 'La fecha de nacimiento no puede ser futura.'
+  const minAge = new Date(today)
+  minAge.setFullYear(minAge.getFullYear() - 18)
+  if (date > minAge) return 'Tenés que ser mayor de 18 años para participar.'
   return null
 }
 
@@ -59,6 +73,9 @@ export function validateNumeroFactura(value: string): string | null {
   const v = value.trim()
   if (!v) return 'El código de cupón es obligatorio.'
   if (v.length > 15) return 'El código no puede superar los 15 caracteres.'
+  if (!/^[a-zA-Z0-9\-]+$/.test(v)) {
+    return 'El código solo puede contener letras, números y guiones.'
+  }
   return null
 }
 
