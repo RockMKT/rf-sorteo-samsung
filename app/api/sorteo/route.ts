@@ -7,7 +7,6 @@ import {
   validateTelefono,
   validateFechaNacimiento,
   validateNumeroFactura,
-  validateSucursal,
   type FormErrors,
 } from '@/lib/validation'
 import { isRateLimited } from '@/lib/rate-limit'
@@ -32,7 +31,7 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json()
-    const { nombre, email, telefono, fecha_nacimiento, numero_factura, sucursal } = body
+    const { nombre, email, telefono, fecha_nacimiento, numero_factura, instagram } = body
 
     // Type guard — reject non-string values
     if (
@@ -40,8 +39,7 @@ export async function POST(req: NextRequest) {
       typeof email !== 'string' ||
       typeof telefono !== 'string' ||
       typeof fecha_nacimiento !== 'string' ||
-      typeof numero_factura !== 'string' ||
-      typeof sucursal !== 'string'
+      typeof numero_factura !== 'string'
     ) {
       return NextResponse.json(
         { error: 'Datos inválidos.' },
@@ -55,7 +53,7 @@ export async function POST(req: NextRequest) {
     const sTelefono = sanitize(telefono)
     const sFecha = sanitize(fecha_nacimiento)
     const sFactura = sanitize(numero_factura)
-    const sSucursal = sanitize(sucursal)
+    const sInstagram = typeof instagram === 'string' ? sanitize(instagram) : null
 
     // Server-side field validation
     const errors: FormErrors = {}
@@ -74,9 +72,6 @@ export async function POST(req: NextRequest) {
 
     const errFactura = validateNumeroFactura(sFactura)
     if (errFactura) errors.numero_factura = errFactura
-
-    const errSucursal = validateSucursal(sSucursal)
-    if (errSucursal) errors.sucursal = errSucursal
 
     if (Object.keys(errors).length > 0) {
       const firstError = Object.values(errors)[0]
@@ -119,9 +114,9 @@ export async function POST(req: NextRequest) {
 
     // Insert participant
     await pool.query(
-      `INSERT INTO raffle_participants (name, email, phone, date_of_birth, coupon_code, subsidiary)
+      `INSERT INTO raffle_participants (name, email, phone, date_of_birth, coupon_code, instagram)
        VALUES ($1, $2, $3, $4, $5, $6)`,
-      [trimmedNombre, trimmedEmail, trimmedTelefono, sFecha, trimmedCoupon, sSucursal]
+      [trimmedNombre, trimmedEmail, trimmedTelefono, sFecha, trimmedCoupon, sInstagram || null]
     )
 
     // Send confirmation email
@@ -135,7 +130,6 @@ export async function POST(req: NextRequest) {
           dynamicTemplateData: {
             nombre: trimmedNombre,
             email: trimmedEmail,
-            sucursal: sSucursal,
             numero_factura: trimmedCoupon,
           },
         })

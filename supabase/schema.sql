@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS raffle_participants (
   phone         TEXT,
   date_of_birth DATE,
   coupon_code   VARCHAR(15) UNIQUE NOT NULL,
-  subsidiary    TEXT
+  instagram     TEXT
 );
 
 -- Índices

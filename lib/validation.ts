@@ -4,24 +4,12 @@ export function sanitize(value: unknown): string {
   return value.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, '').trim()
 }
 
-export const SUCURSALES = [
-  { value: 'pilar', label: 'Pilar' },
-  { value: 'unicenter', label: 'Unicenter' },
-  { value: 'palermo', label: 'Palermo' },
-  { value: 'orono', label: 'Oroño' },
-  { value: 'alto-rosario', label: 'Alto Rosario' },
-  { value: 'savoy', label: 'Savoy' },
-] as const
-
-const SUCURSAL_VALUES = SUCURSALES.map(s => s.value) as readonly string[]
-
 export interface FormErrors {
   nombre?: string
   email?: string
   telefono?: string
   fecha_nacimiento?: string
   numero_factura?: string
-  sucursal?: string
   acepta_terminos?: string
 }
 
@@ -79,12 +67,6 @@ export function validateNumeroFactura(value: string): string | null {
   return null
 }
 
-export function validateSucursal(value: string): string | null {
-  if (!value) return 'La sucursal es obligatoria.'
-  if (!SUCURSAL_VALUES.includes(value)) return 'La sucursal seleccionada no es válida.'
-  return null
-}
-
 export function validateAceptaTerminos(value: boolean): string | null {
   if (!value) return 'Tenés que aceptar los términos y condiciones para participar.'
   return null
@@ -96,7 +78,6 @@ export function validateForm(data: {
   telefono: string
   fecha_nacimiento: string
   numero_factura: string
-  sucursal: string
   acepta_terminos: boolean
 }): FormErrors | null {
   const errors: FormErrors = {}
@@ -115,9 +96,6 @@ export function validateForm(data: {
 
   const factura = validateNumeroFactura(data.numero_factura)
   if (factura) errors.numero_factura = factura
-
-  const sucursal = validateSucursal(data.sucursal)
-  if (sucursal) errors.sucursal = sucursal
 
   const terminos = validateAceptaTerminos(data.acepta_terminos)
   if (terminos) errors.acepta_terminos = terminos

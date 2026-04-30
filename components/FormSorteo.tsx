@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { SUCURSALES, validateForm, type FormErrors } from '@/lib/validation'
+import { validateForm, type FormErrors } from '@/lib/validation'
 
 interface Props {
   onSuccess: (data: { nombre: string; email: string }) => void
@@ -15,7 +15,7 @@ interface FormData {
   telefono: string
   fecha_nacimiento: string
   numero_factura: string
-  sucursales: string
+  instagram: string
   acepta_terminos: boolean
 }
 
@@ -25,7 +25,7 @@ const EMPTY: FormData = {
   telefono: '',
   fecha_nacimiento: '',
   numero_factura: '',
-  sucursales: '',
+  instagram: '',
   acepta_terminos: false,
 }
 
@@ -68,7 +68,6 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
       telefono: form.telefono,
       fecha_nacimiento: form.fecha_nacimiento,
       numero_factura: form.numero_factura,
-      sucursal: form.sucursales,
       acepta_terminos: form.acepta_terminos,
     })
 
@@ -93,7 +92,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           telefono: form.telefono,
           fecha_nacimiento: form.fecha_nacimiento,
           numero_factura: form.numero_factura,
-          sucursal: form.sucursales,
+          instagram: form.instagram,
         }),
       })
 
@@ -219,32 +218,21 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
         </p>
       </div>
 
-      {/* Sucursal */}
+      {/* Instagram */}
       <div>
-        <label htmlFor="sucursales" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
-          Sucursal dónde consumiste <span className="text-red-400">*</span>
+        <label htmlFor="instagram" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
+          Usuario de Instagram
         </label>
-        <div className="relative">
-          <select
-            id="sucursales"
-            name="sucursales"
-            value={form.sucursales}
-            onChange={handleChange}
-            required
-            className="input-rf appearance-none pr-10 cursor-pointer"
-          >
-            <option value="" disabled>Seleccioná una sucursal</option>
-            {SUCURSALES.map(({ value, label }) => (
-              <option key={value} value={value}>{label}</option>
-            ))}
-          </select>
-          <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-rf-dorado/60">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </div>
-        </div>
-        <FieldError message={fieldErrors.sucursal} />
+        <input
+          id="instagram"
+          type="text"
+          name="instagram"
+          value={form.instagram}
+          onChange={handleChange}
+          placeholder="@tu_usuario"
+          maxLength={50}
+          className="input-rf"
+        />
       </div>
 
       {/* Términos */}
