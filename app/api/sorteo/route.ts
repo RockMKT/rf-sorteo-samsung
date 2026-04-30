@@ -86,19 +86,6 @@ export async function POST(req: NextRequest) {
     const trimmedNombre = sNombre
     const trimmedTelefono = sTelefono
 
-    // Check coupon code exists
-    const couponResult = await pool.query(
-      'SELECT id FROM coupon_codes WHERE code = $1',
-      [trimmedCoupon]
-    )
-
-    if (couponResult.rows.length === 0) {
-      return NextResponse.json(
-        { error: 'El código de cupón ingresado no es válido.', errors: { numero_factura: 'El código de cupón ingresado no es válido.' } },
-        { status: 400 }
-      )
-    }
-
     // Check coupon not already used
     const existingResult = await pool.query(
       'SELECT id FROM raffle_participants WHERE coupon_code = $1',

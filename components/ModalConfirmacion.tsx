@@ -60,6 +60,13 @@ export default function ModalConfirmacion({ nombre, email, onClose }: Props) {
     return () => clearInterval(timer)
   }, [])
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      window.location.href = 'https://rockandfellers.com.ar'
+    }, 5000)
+    return () => clearTimeout(timeout)
+  }, [])
+
   const goNext = () => {
     setDirection(1)
     setCurrent(prev => (prev + 1) % PROMOS.length)
