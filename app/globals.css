@@ -87,6 +87,9 @@ p, span, li, a, label, input, select, textarea, button {
   font-family: 'GothamBook', Arial, sans-serif;
   color: #F0F0F0;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   transition: border-color 0.2s;
 }
 .input-rf::placeholder { color: rgba(240, 240, 240, 0.3); }
