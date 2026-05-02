@@ -160,7 +160,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
 
       {/* Teléfono + Fecha de nacimiento */}
       <div className="grid grid-cols-2 gap-3">
-        <div>
+        <div className="min-w-0">
           <label htmlFor="telefono" className="block text-[10px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
             Teléfono <span className="text-red-400">*</span>
           </label>
@@ -178,7 +178,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           />
           <FieldError message={fieldErrors.telefono} />
         </div>
-        <div>
+        <div className="min-w-0">
           <label htmlFor="fecha_nacimiento" className="block text-[10px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
             Fecha de nacimiento <span className="text-red-400">*</span>
           </label>
