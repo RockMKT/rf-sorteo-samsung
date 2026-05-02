@@ -75,7 +75,7 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
           transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
           className="text-rf-texto/60 text-base md:text-lg max-w-lg leading-relaxed"
         >
-          Escribí tu código de cupón y participá por un Smart TV 98" para disfrutar
+          Escaneá tu código de cupón y participá por un Smart TV 98" para disfrutar
           el mundial en tu casa. Cada código de Rock&amp;Feller&apos;s es una oportunidad.
         </motion.p>
       </div>
@@ -97,7 +97,7 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
                 Registrá tu participación
               </h2>
               <p className="text-xs text-rf-texto/40">
-                Completá el formulario con el cupón entregado junto con tu factura
+                Completá el formulario con el cupón entregado junto con tu factura. <span className='font-bold'>¡Comentando en la publicación del sorteo en Instagram duplicas tus chances!</span>
               </p>
             </div>
 

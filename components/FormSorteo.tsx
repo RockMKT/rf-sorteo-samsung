@@ -121,7 +121,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
     <form onSubmit={handleSubmit} noValidate className="space-y-4">
       {/* Nombre completo */}
       <div>
-        <label htmlFor="nombre" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
+        <label htmlFor="nombre" className="block text-[10px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
           Nombre y apellido <span className="text-red-400">*</span>
         </label>
         <input
@@ -141,7 +141,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
 
       {/* Email */}
       <div>
-        <label htmlFor="email" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
+        <label htmlFor="email" className="block text-[10px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
           Email <span className="text-red-400">*</span>
         </label>
         <input
@@ -161,7 +161,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
       {/* Teléfono + Fecha de nacimiento */}
       <div className="grid grid-cols-2 gap-3">
         <div>
-          <label htmlFor="telefono" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
+          <label htmlFor="telefono" className="block text-[10px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
             Teléfono <span className="text-red-400">*</span>
           </label>
           <input
@@ -179,7 +179,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           <FieldError message={fieldErrors.telefono} />
         </div>
         <div>
-          <label htmlFor="fecha_nacimiento" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
+          <label htmlFor="fecha_nacimiento" className="block text-[10px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
             Fecha de nacimiento <span className="text-red-400">*</span>
           </label>
           <input
@@ -198,7 +198,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
 
       {/* Código de cupón */}
       <div>
-        <label htmlFor="numero_factura" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
+        <label htmlFor="numero_factura" className="block text-[10px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
           Código de cupón <span className="text-red-400">*</span>
         </label>
         <input
@@ -207,20 +207,19 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
           name="numero_factura"
           value={form.numero_factura}
           onChange={handleChange}
-          placeholder="Ej: 0001-00012345"
           required
           maxLength={15}
           className="input-rf"
         />
         <FieldError message={fieldErrors.numero_factura} />
         <p className="text-[11px] text-rf-texto/30 mt-1 pl-1">
-          Encontrás el número en la parte superior de tu factura.
+          Escaneá el QR de tu cupón.
         </p>
       </div>
 
       {/* Instagram */}
       <div>
-        <label htmlFor="instagram" className="block text-[11px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
+        <label htmlFor="instagram" className="block text-[10px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
           Usuario de Instagram
         </label>
         <input
