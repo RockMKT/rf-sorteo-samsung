@@ -78,21 +78,7 @@ p, span, li, a, label, input, select, textarea, button {
 }
 
 /* ─── Inputs ─────────────────────────────────── */
-input[type="date"] {
-  display: block;
-  width: 100%;
-  min-width: 0;
-  max-width: 100%;
-  box-sizing: border-box;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-input[type="date"]::-webkit-date-and-time-value {
-  min-width: 0;
-  width: 100%;
-  text-align: left;
-}
+/* ─── Inputs ─────────────────────────────────── */
 
 .input-rf {
   background-color: #1A1A1A;
@@ -105,16 +91,47 @@ input[type="date"]::-webkit-date-and-time-value {
   width: 100%;
   max-width: 100%;
   min-width: 0;
+  height: 46px;
+  line-height: 1.2;
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
-.input-rf::placeholder { color: rgba(240, 240, 240, 0.3); }
-.input-rf:hover { border-color: rgba(196, 171, 75, 0.4); }
+
+input[type="date"].input-rf {
+  display: block;
+  height: 46px;
+  min-height: 46px;
+  line-height: 46px;
+  -webkit-appearance: none;
+  appearance: none;
+  padding-left: 0.6rem;
+  padding-right: 0.35rem;
+}
+
+input[type="date"].input-rf::-webkit-date-and-time-value {
+  height: 100%;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.input-rf::placeholder {
+  color: rgba(240, 240, 240, 0.3);
+}
+
+.input-rf:hover {
+  border-color: rgba(196, 171, 75, 0.4);
+}
+
 .input-rf:focus {
   outline: none;
   border-color: #fab915;
   box-shadow: 0 0 0 1px rgba(196, 171, 75, 0.3);
 }
+
 /* Fondo del select en negro para que no rompa en Chromium */
 .input-rf option {
   background-color: #1A1A1A;
