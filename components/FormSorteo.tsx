@@ -190,7 +190,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
             onChange={handleChange}
             required
             max={new Date().toISOString().split('T')[0]}
-            className="input-rf w-full min-w-0 max-w-full box-border"
+            className="input-rf w-full min-w-0 max-w-full box-border appearance-none"
           />
           <FieldError message={fieldErrors.fecha_nacimiento} />
         </div>

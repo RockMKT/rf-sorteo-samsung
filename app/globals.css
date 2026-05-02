@@ -78,6 +78,22 @@ p, span, li, a, label, input, select, textarea, button {
 }
 
 /* ─── Inputs ─────────────────────────────────── */
+input[type="date"] {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="date"]::-webkit-date-and-time-value {
+  min-width: 0;
+  width: 100%;
+  text-align: left;
+}
+
 .input-rf {
   background-color: #1A1A1A;
   border: 1px solid rgba(196, 171, 75, 0.2);
