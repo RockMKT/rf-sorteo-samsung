@@ -45,18 +45,18 @@ export default function ModalPedidoBA({ onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-sm bg-rf-carbon border border-rf-dorado/20 rounded-2xl p-6 shadow-2xl"
+        className="relative w-full max-w-sm bg-rf-carbon border border-rf-dorado/20 p-6 shadow-2xl"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div>
             <p className="text-[10px] font-display uppercase tracking-widest text-rf-dorado/60 mb-0.5">
-              Pedir en
+              Pedir delivery en
             </p>
             <h2
               id="modal-ba-titulo"
-              className="font-display text-lg uppercase tracking-widest text-rf-texto"
+              className="font-display text-lg uppercase tracking-widest text-white text-rf-texto"
             >
               Buenos Aires
             </h2>
@@ -64,7 +64,7 @@ export default function ModalPedidoBA({ onClose }: Props) {
           <button
             onClick={onClose}
             aria-label="Cerrar"
-            className="text-rf-texto/40 hover:text-rf-dorado transition-colors p-1.5 rounded-lg hover:bg-white/5"
+            className="text-rf-texto/40 hover:text-rf-dorado transition-colors p-1.5 hover:bg-white/5"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -80,11 +80,11 @@ export default function ModalPedidoBA({ onClose }: Props) {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between gap-4 bg-rf-gris border border-rf-dorado/10 hover:border-rf-dorado/40 rounded-xl px-4 py-3.5 transition-all duration-200"
+              className="group flex items-center justify-between gap-4 bg-rf-gris border border-rf-dorado/10 hover:border-rf-dorado/40 px-4 py-3.5 transition-all duration-200"
             >
               <div className="text-left">
                 <p className="font-display text-sm uppercase tracking-wider text-rf-texto group-hover:text-rf-dorado transition-colors">
-                  Pedir en {nombre}
+                  {nombre}
                 </p>
                 <p className="text-xs text-rf-texto/40 mt-0.5">{direccion}</p>
               </div>
