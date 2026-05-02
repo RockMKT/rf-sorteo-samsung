@@ -159,7 +159,7 @@ export default function FormSorteo({ onSuccess, onTerminosClick }: Props) {
       </div>
 
       {/* Teléfono + Fecha de nacimiento */}
-      <div className="grid grid-cols-[0.65fr_1.35fr] gap-2 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div className="min-w-0">
           <label htmlFor="telefono" className="block text-[10px] font-display uppercase tracking-widest text-rf-dorado/80 mb-1.5">
             Teléfono <span className="text-red-400">*</span>
