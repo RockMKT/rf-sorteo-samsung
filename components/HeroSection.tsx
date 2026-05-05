@@ -33,7 +33,7 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
           className="mb-6 w-full"
         >
           <h1 className="font-display text-3xl md:text-5xl uppercase tracking-wide text-rf-texto leading-tight">
-            MIRÁ EL MUNDIAL EN 98&ldquo;
+            MIRÁ EL MUNDIAL EN 85&ldquo;
           </h1>
           <div aria-hidden="true" className="mt-4 mx-auto w-16 h-px bg-rf-dorado/50" />
         </motion.div>
