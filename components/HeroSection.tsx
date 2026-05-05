@@ -58,7 +58,7 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
           {/* TV */}
           <div className="relative aspect-video w-full">
             <Image
-              src="/televisor98.png"
+              src="/smarttv.png"
               alt="Premio: televisor 98 pulgadas"
               fill
               priority
@@ -75,7 +75,7 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
           transition={{ duration: 0.6, delay: 0.25, ease: 'easeOut' }}
           className="text-rf-texto/60 text-base md:text-lg max-w-lg leading-relaxed"
         >
-          Escaneá tu código de cupón y participá por un Smart TV 98" para disfrutar
+          Escaneá tu código de cupón y participá por un Smart TV 85" para disfrutar
           el mundial en tu casa. Cada código de Rock&amp;Feller&apos;s es una oportunidad.
         </motion.p>
       </div>
