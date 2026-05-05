@@ -58,8 +58,8 @@ export default function HeroSection({ onFormSuccess, onTerminosClick }: Props) {
           {/* TV */}
           <div className="relative aspect-video w-full">
             <Image
-              src="/smarttv.png"
-              alt="Premio: televisor 98 pulgadas"
+              src="/rockandfellerstv.png"
+              alt="Premio: televisor 85 pulgadas"
               fill
               priority
               className="object-contain drop-shadow-2xl"
