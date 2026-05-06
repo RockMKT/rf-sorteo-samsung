@@ -64,7 +64,7 @@ export default function ModalTerminos({ onClose }: Props) {
           {/* 2 */}
           <div className="space-y-1.5">
             <p className="font-display text-rf-dorado text-xs uppercase tracking-wide">2. Vigencia.</p>
-            <p>Plazo: La posibilidad de inscripción al sorteo será desde las 00:00 hs del 01/05 hasta las 23:59 hs del 31/05.</p>
+            <p>Plazo: La posibilidad de inscripción al sorteo será desde las 19:00hs del 07/05 hasta las 23:59 hs del 08/06.</p>
           </div>
 
           {/* 3 */}
@@ -83,9 +83,9 @@ export default function ModalTerminos({ onClose }: Props) {
             <p className="pl-3">b) Completar el formulario con datos reales: Nombre y Apellido, Email, Fecha de Nacimiento, Código de cupón y Teléfono.</p>
             <p className="pl-3">c) Completar el formulario de participación con el código de cupón entregado junto a la factura emitida por el establecimiento del Organizador dentro del Plazo de Vigencia.</p>
             <p className="pl-3">Cada cupón válido equivale a una (1) chance.</p>
-            <p><span className="text-rf-dorado/80">4.2.</span> Incentivo &quot;Doble Chance&quot;: Aquellos que comenten la publicación oficial del sorteo en la cuenta de Instagram del Organizador (@rockandfellersba) obtendrán una (1) chance adicional por única vez, siempre que hayan completado previamente el formulario de participación y cumplan con los requisitos establecidos en las presentes Bases y Condiciones.</p>
+            <p><span className="text-rf-dorado/80">4.2.</span> Incentivo &quot;Doble Chance&quot;: Aquellos que sigan y comenten la publicación oficial del sorteo en la cuenta de Instagram del Organizador (@rockandfellersba / @rockandfellersrosario) obtendrán una (1) chance adicional por única vez, siempre que hayan completado previamente el formulario de participación y cumplan con los requisitos establecidos en las presentes Bases y Condiciones.</p>
             <p><span className="text-rf-dorado/80">4.3.</span> Gratuidad: En cumplimiento de la normativa vigente, la participación es gratuita y no deberá realizar pago alguno una vez enviado lo requerido.</p>
-            <p><span className="text-rf-dorado/80">4.4.</span> El día 01/06 se realizará el sorteo incluyendo a todos los participantes que hayan cumplido con los términos pactados.</p>
+            <p><span className="text-rf-dorado/80">4.4.</span> El día 09/06 se realizará el sorteo incluyendo a todos los participantes que hayan cumplido con los términos pactados.</p>
           </div>
 
           {/* 5 */}

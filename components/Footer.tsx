@@ -42,6 +42,16 @@ export default function Footer({ onTerminosClick }: Props) {
           </p>
         </div>
 
+         {/* Sugerencia */}
+        <div>
+          <h3 className="text-[10px] font-display uppercase tracking-widest text-rf-dorado/70 mb-3">
+            Soporte
+          </h3>
+          <p className="text-rf-texto/45 text-sm leading-relaxed">
+            En caso de no poder completar el formulario dirigite a contacto@rfrosario.com.ar
+          </p>
+        </div>
+
         {/* Legal */}
         <div>
           <h3 className="text-[10px] font-display uppercase tracking-widest text-rf-dorado/70 mb-3">
