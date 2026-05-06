@@ -64,7 +64,7 @@ export function validateNumeroFactura(value: string): string | null {
   if (!/^[a-zA-Z0-9\-]+$/.test(v)) {
     return 'El código solo puede contener letras, números y guiones.'
   }
-  if (!/^[1-7]/.test(v)) {
+  if (!/^[1-467]/.test(v)) {
     return 'El codigo ingresado no es valido'
   }
   return null
