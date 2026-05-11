@@ -69,7 +69,7 @@ export default function ModalConfirmacion({ nombre, email, onClose }: Props) {
             href="https://www.instagram.com/p/DYDMIRQklF8/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3.5 rounded-xl font-display uppercase text-sm bg-dorado text-rf-negro hover:opacity-90 active:scale-[0.98] transition-all text-center"
+            className="w-full py-3.5 rounded-xl font-display uppercase text-sm bg-gradient-dorado text-rf-negro hover:opacity-90 active:scale-[0.98] transition-all text-center"
           >
             Duplicá chances en Buenos Aires
           </a>
@@ -77,7 +77,7 @@ export default function ModalConfirmacion({ nombre, email, onClose }: Props) {
             href="https://www.instagram.com/p/DYAi-_iDNSM/"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full py-3.5 rounded-xl font-display uppercase text-sm bg-dorado text-rf-negro hover:opacity-90 active:scale-[0.98] transition-all text-center"
+            className="w-full py-3.5 rounded-xl font-display uppercase text-sm bg-gradient-dorado text-rf-negro hover:opacity-90 active:scale-[0.98] transition-all text-center"
           >
             Duplicá chances en Rosario
           </a>
