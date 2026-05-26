@@ -58,7 +58,7 @@ export default function ModalTerminos({ onClose }: Props) {
           <div className="space-y-1.5">
             <p className="font-display text-rf-dorado text-xs uppercase tracking-wide">1.- Vigencia. Alcance Geográfico.</p>
             <p>MFK S.A., sito en Avenida del Libertador 5936 piso 14 A, Ciudad Autónoma de Buenos Aires, Argentina (en adelante, &quot;MFK&quot; y/o el &quot;Organizador&quot;) realizará un sorteo de acuerdo a las Bases y Condiciones (en adelante, las &quot;Bases&quot;).</p>
-            <p><span className="text-rf-dorado/80">1.1.</span>La Participación será para quienes se encuentren en la República Argentina en el área geográfica de la Ciudad de Buenos Aires y Gran Buenos Aires (en adelante, el &quot;Ámbito Geográfico&quot;).</p>
+            <p><span className="text-rf-dorado/80">1.1.</span>La Participación será para quienes se encuentren en la República Argentina.</p>
           </div>
 
           {/* 2 */}
