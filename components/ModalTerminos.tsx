@@ -95,6 +95,8 @@ export default function ModalTerminos({ onClose }: Props) {
             <p><span className="text-rf-dorado/80">5.2.</span> Garantía: El Organizador no otorga garantía propia; el ganador deberá gestionar cualquier falla directamente con el fabricante bajo la garantía oficial (Ley 24.240).</p>
             <p><span className="text-rf-dorado/80">5.3.</span> Gastos: Todo impuesto (ej: Ley 20.630), tasa, contribución o gasto de envío/instalación no especificado será a cargo exclusivo del ganador.</p>
             <p><span className="text-rf-dorado/80">5.4.</span> El Premio deberá ser retirado por el ganador en la sucursal del Organizador que este indique oportunamente, dentro del plazo y condiciones que se le informen al momento de la notificación. La entrega se realizará en un plazo no mayor a sesenta (60) días corridos desde la fecha del sorteo, previa coordinación entre las Partes.</p>
+            <p><span className="text-rf-dorado/80">5.5.</span> Constancia de entrega y foto testigo: Al momento de la entrega del premio, el ganador deberá prestar conformidad para que el Organizador tome una fotografía testigo al momento de la entrega del Premio. El ganador autoriza expresamente al Organizador a utilizar, reproducir, publicar y difundir su nombre, apellido, imagen, voz y/o registros audiovisuales vinculados a la entrega del Premio, sin derecho a compensación adicional alguna, en redes sociales, sitio web, piezas digitales, gráficas, audiovisuales, prensa y/o cualquier otro canal de comunicación del Organizador, exclusivamente con fines institucionales, promocionales y de difusión del sorteo.
+ </p>
           </div>
 
           {/* 6 */}
